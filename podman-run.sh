@@ -6,4 +6,4 @@ if [[ -n "$1" ]]; then
 fi
 
 # runs the pi harness image interactively via podman run
-podman run -it pisandbox:latest
+podman run --rm -it pisandbox:latest
