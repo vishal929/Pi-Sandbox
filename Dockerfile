@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
-# Install the Pi coding agent globally from npm (or adjust to your specific harness package)
+# Install the Pi coding agent globally from npm 
 RUN npm install -g @earendil-works/pi-coding-agent
 
 # Add the node user to the sudo group and allow passwordless sudo
