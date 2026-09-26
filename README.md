@@ -25,9 +25,9 @@ The entrypoint is the Pi harness CLI itself
 These are the extensions that I will be using with Pi
 
 ## credential setup
-Instead of manual credential setup, leverage the /login command in pi itself. 
+the credentials/credentials.env file includes exports for API Keys to use with pi harness.
 
-The API Keys you provide will be saved in the container volume for Pi. 
+Look at the credentials.env.example accordingly. These env variables are loaded into the process via podman run flags and not included at image build time. 
 
 ## Podman-Run.sh Usage
 this script provides options to build and run the pi harness sandbox

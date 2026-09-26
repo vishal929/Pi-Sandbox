@@ -66,4 +66,7 @@ else
 fi
 
 # runs the pi harness image interactively via podman run
-podman run --rm -v pi-volume:/root/.pi/agent/ -it pisandbox:latest 
+podman run --rm -it \
+    -v pi-volume:/root/.pi/agent/ \
+    --env-file credentials/credentials.env \
+    pisandbox:latest 
