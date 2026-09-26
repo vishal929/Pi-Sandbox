@@ -1,5 +1,5 @@
 # Pi-Sandbox
-Environment Sandbox for running the Pi Agent Harness
+Environment Sandbox for running the Pi Agent Harness. You need some container runtime like podman or docker. 
 
 ## Rootless
 For my setup, I am running this image with a rootless podman setup.
@@ -25,4 +25,15 @@ The entrypoint is the Pi harness CLI itself
 These are the extensions that I will be using with Pi
 
 ## credential setup
-todo, need to mount pi harness provider credentials
+Instead of manual credential setup, leverage the /login command in pi itself. 
+
+The API Keys you provide will be saved in the container volume for Pi. 
+
+## Podman-Run.sh Usage
+this script provides options to build and run the pi harness sandbox
+
+### flags
+- -b
+    - If set, we run podman build.
+- -v
+    - Specify this flag to cleanup/recreate the volume used with the pi sandbox container
