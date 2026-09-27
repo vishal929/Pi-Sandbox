@@ -5,6 +5,8 @@ services:
     volumes:
       - ./proxy/squid.conf:/etc/squid/squid.conf:ro
       - ./proxy/allowlist.txt:/etc/squid/allowlist.txt:ro
+    cap_add:
+      - NET_RAW
     ports:
       - "3128:3128"
     networks:

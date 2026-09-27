@@ -1,2 +1,3 @@
 # ignore any credentials
 credentials/*.env
+podman-compose.generated.yml

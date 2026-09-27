@@ -1,6 +1,7 @@
-github.com
+.github.com
+.githubusercontent.com
 pypi.org
-google.com
-redhat.com
+.google.com
+.redhat.com
 wikipedia.org
 pi.dev
