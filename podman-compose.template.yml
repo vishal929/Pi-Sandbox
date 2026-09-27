@@ -30,7 +30,8 @@ ${DYNAMIC_VOLUMES}
     tty: true
     networks:
       - pi-internal-net
-
+    env_file:
+      - ./credentials/credentials.env
 networks:
   pi-internal-net:
     internal: true

@@ -35,14 +35,13 @@ the credentials/credentials.env file includes exports for API Keys to use with p
 
 Look at the credentials.env.example accordingly. These env variables are loaded into the process via podman run flags and not included at image build time. 
 
-## Podman-Run.sh Usage
-this script provides options to build and run the pi harness sandbox
+## run-compose.sh Usage
+this script provides options to build and run the pi harness stack I have defined
 
-### flags
-- -b
-    - If set, we run podman build.
-    - The image is pisandbox and always tagged as latest
-- -v
-    - Specify this flag to cleanup/recreate the volume used with the pi sandbox container
-- -p
-    - Specify this flag to point to a path to mount when running the container.
+### arguments
+Host directory locations can be passed as argument to be mounted in the pi-agent container under the /home/workspace location. 
+
+i.e ```./run-compose.sh "PATH/TO/Dir1" "PATH/TO/DIR2" ...```
+
+## kill-compose.sh
+This will tear down the pi harness stack based on the compose file.
