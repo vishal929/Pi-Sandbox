@@ -1,0 +1,38 @@
+services:
+  proxy:
+    image: docker.io/ubuntu/squid:latest
+    container_name: pi-proxy
+    volumes:
+      - ./proxy/squid.conf:/etc/squid/squid.conf:ro
+      - ./proxy/allowlist.txt:/etc/squid/allowlist.txt:ro
+    ports:
+      - "3128:3128"
+    networks:
+      - pi-internal-net
+      - pi-external-net
+
+  pi-agent:
+    build: .
+    image: localhost/pi-sandbox:latest
+    container_name: pi-agent
+    volumes:
+      - pi-volume:/root/.pi/agent/
+${DYNAMIC_VOLUMES}
+    environment:
+      - http_proxy=http://proxy:3128
+      - https_proxy=http://proxy:3128
+      - no_proxy=localhost,127.0.0.1
+    depends_on:
+      - proxy
+    stdin_open: true
+    tty: true
+    networks:
+      - pi-internal-net
+
+networks:
+  pi-internal-net:
+    internal: true
+  pi-external-net:
+
+volumes:
+  pi-volume:

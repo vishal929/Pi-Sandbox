@@ -1,0 +1,34 @@
+#!/bin/bash
+set -euo pipefail
+
+# get script location
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+# location where the user is
+INVOCATION_DIR="$PWD"
+
+# Path to template and generated file
+TEMPLATE="$SCRIPT_DIR/podman-compose.template.yml"
+COMPOSE_FILE="$SCRIPT_DIR/podman-compose.generated.yml"
+
+# Build the volumes string
+# Arguments passed: /path/to/host1 /path/to/host2 ...
+VOL_LINES=""
+for path in "$@"; do
+    # Ensure absolute path
+    abs_path=$(realpath "$path")
+    # Get the base directory name
+    dir_name=$(basename "$abs_path")
+    VOL_LINES="${VOL_LINES}      - ${abs_path}:/home/workspace/${dir_name}:Z
+"
+done
+
+# Use envsubst to create the actual compose file
+export DYNAMIC_VOLUMES="${VOL_LINES}"
+envsubst < "$TEMPLATE" > "$COMPOSE_FILE"
+
+echo "Launching with extra volumes..."
+podman compose -f "$COMPOSE_FILE" up -d
+
+echo "Container is running. Attaching to pi-agent..."
+podman attach pi-agent

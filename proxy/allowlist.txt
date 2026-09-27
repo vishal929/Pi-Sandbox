@@ -1,4 +1,4 @@
-api.github.com
+github.com
 pypi.org
 google.com
 redhat.com
