@@ -10,7 +10,7 @@ todo, look into wrapping network access based on domain
 i.e dont need to ask for permission to hit the AI hosting domain or something like wikipedia
 
 ## Dockerfile setup
-We rely on the debian trixy slim node image as a base and install other dependencies the agent might need
+We rely on the debian trixy slim node image as a base and install other dependencies the agent might need.
 The entrypoint is the Pi harness CLI itself
 
 ## Current dependencies installed in the image
@@ -35,5 +35,8 @@ this script provides options to build and run the pi harness sandbox
 ### flags
 - -b
     - If set, we run podman build.
+    - The image is pisandbox and always tagged as latest
 - -v
     - Specify this flag to cleanup/recreate the volume used with the pi sandbox container
+- -p
+    - Specify this flag to point to a path to mount when running the container.

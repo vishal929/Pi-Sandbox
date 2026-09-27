@@ -1,9 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
+# get script location
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+# location where the user is
+INVOCATION_DIR="$PWD"
+
 # Define a usage/help function
 usage() {
-    echo "Usage: $0 [-b] [-v]"
+    echo "Usage: $0 [-b] [-v] [-p MNT_POINT]"
     exit 1
 }
 
@@ -13,13 +19,15 @@ NEW_VOLUME=false
 
 # Parse the options
 # A colon (:) after a letter means that flag requires an argument
-while getopts "bv" opt; do
+while getopts "bvp:" opt; do
     case "${opt}" in
         b)
             DO_BUILD=true
             ;;
         v)
             NEW_VOLUME=true
+            ;;
+        p)  MNT_POINT="${OPTARG}"
             ;;
         *)
             usage
@@ -68,5 +76,6 @@ fi
 # runs the pi harness image interactively via podman run
 podman run --rm -it \
     -v pi-volume:/root/.pi/agent/ \
-    --env-file credentials/credentials.env \
+    --env-file $SCRIPT_DIR/credentials/credentials.env \
+    ${MNT_POINT:+"-v$INVOCATION_DIR/$MNT_POINT:/home/workspace:Z"}\
     pisandbox:latest 
