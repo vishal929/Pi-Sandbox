@@ -5,9 +5,15 @@ Environment Sandbox for running the Pi Agent Harness. You need some container ru
 For my setup, I am running this image with a rootless podman setup.
 This will ensure that the process does not have priviledged access on the host. 
 
+## File Access
+The agent only has access to modify the volumes which are mounted by the user in the configuration. 
+
 ## Network Access
-todo, look into wrapping network access based on domain
-i.e dont need to ask for permission to hit the AI hosting domain or something like wikipedia
+We use an application-level guard and an http proxy to prevent unwanted network requests made by the pi harness. 
+
+The pi-permission-system will be setup to inspect outgoing requests to make sure they are following the https standard and are not fishy. 
+
+The squid forward http proxy will forward all requests from the pi agent after checking against the allowlist specified in the squid configuration.  
 
 ## Dockerfile setup
 We rely on the debian trixy slim node image as a base and install other dependencies the agent might need.

@@ -1,0 +1,6 @@
+api.github.com
+pypi.org
+google.com
+redhat.com
+wikipedia.org
+pi.dev
