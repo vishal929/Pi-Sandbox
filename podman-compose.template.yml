@@ -14,7 +14,6 @@ services:
       - pi-external-net
 
   pi-agent:
-    build: .
     image: localhost/pi-sandbox:latest
     container_name: pi-agent
     volumes:

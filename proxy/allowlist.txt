@@ -6,3 +6,4 @@ pypi.org
 .redhat.com
 wikipedia.org
 pi.dev
+.npmjs.org
