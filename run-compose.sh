@@ -20,6 +20,9 @@ podman build -f "$SCRIPT_DIR/Dockerfile" -t pi-sandbox:latest
 # bake in permission system files to the volume lines
 VOL_LINES="      - $SCRIPT_DIR/extensions/pi-permission-system/pi-permissions.jsonc:/home/node/.pi/agent/extensions/pi-permission-system/pi-permissions.jsonc:ro
 "
+# mount the skill files, so if pi wants to customize them, we can commit them back
+VOL_LINES="${VOL_LINES}      - $SCRIPT_DIR/skills:/home/node/.pi/agent/skills:Z
+"
 for path in "$@"; do
     # Ensure absolute path
     abs_path=$(realpath "$path")
