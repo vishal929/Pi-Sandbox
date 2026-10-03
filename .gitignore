@@ -1,4 +1,5 @@
 # ignore any credentials
 credentials/*.env
+
+# ignore the generated compose file
 podman-compose.generated.yml
-proxy/allowlist.txt

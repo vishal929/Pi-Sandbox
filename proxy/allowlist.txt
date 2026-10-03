@@ -7,3 +7,4 @@ pypi.org
 wikipedia.org
 pi.dev
 .npmjs.org
+opencode.ai
