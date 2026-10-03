@@ -11,9 +11,6 @@ INVOCATION_DIR="$PWD"
 TEMPLATE="$SCRIPT_DIR/podman-compose.template.yml"
 COMPOSE_FILE="$SCRIPT_DIR/podman-compose.generated.yml"
 
-# firstly build the image
-podman build -f "$SCRIPT_DIR/Dockerfile" -t pi-sandbox:latest
-
 # Build the volumes string
 # Arguments passed: /path/to/host1 /path/to/host2 ...
 
