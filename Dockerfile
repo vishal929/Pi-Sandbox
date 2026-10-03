@@ -28,4 +28,9 @@ ENV PATH="/home/node/.pi/agent/bin:${PATH}"
 RUN npm config set allow-scripts=pi-permission-system --location=user
 RUN pi install npm:pi-permission-system --approve
 
+LABEL org.opencontainers.image.title="Pi Agent Sandbox" \
+      org.opencontainers.image.version="1.0.0" \
+      org.opencontainers.image.source="localhost" \
+      org.opencontainers.image.licenses="MIT"
+
 CMD ["pi"]
