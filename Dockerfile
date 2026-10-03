@@ -10,10 +10,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
-# Install the Pi coding agent globally from npm 
-RUN npm config set allow-scripts=@google/genai,esbuild,protobufjs,pi-permission-system --location=user
-RUN npm install -g @earendil-works/pi-coding-agent
-
 # Add the node user to the sudo group and allow passwordless sudo
 RUN usermod -aG sudo node \
     && echo "node ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/node 
@@ -21,6 +17,12 @@ RUN usermod -aG sudo node \
 USER node
 WORKDIR /home/node
 ENV HOME=/home/node
+
+# Install the Pi coding agent
+RUN curl -fsSL https://pi.dev/install.sh | sh
+
+RUN export PATH="/home/node/.pi/agent/bin:$PATH"
+ENV PATH="/home/node/.pi/agent/bin:${PATH}"
 
 # install the pi permissions system extension
 RUN npm config set allow-scripts=pi-permission-system --location=user
